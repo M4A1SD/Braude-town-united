@@ -9,6 +9,16 @@ require('dotenv').config();
 // npm install dotenv
 // npm init -y
 const PORT = process.env.PORT || 3000;
+
+// ------------------------------------------------------------------------------
+// Deployment
+const path = require('path');
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, '../client/dist')));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+});
+
 // ------------------------------------------------------------------------------
 // GOOGLE AUTH
 const { OAuth2Client } = require('google-auth-library');
