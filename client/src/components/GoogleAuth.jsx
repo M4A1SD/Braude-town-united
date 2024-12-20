@@ -13,7 +13,7 @@ function SignIn() {
   // This function will be called upon a successful login
   const handleSuccess = async (credentialResponse) => {
     // If you are using the authorization code flow, you will receive a code to be exchanged for an access token
-    console.log(credentialResponse);
+    // console.log(credentialResponse);
     // Send the authorization code to your backend server
     try {
       console.log("sending authorization code to server",process.env.SERVER_URL+'/api/auth/google');
