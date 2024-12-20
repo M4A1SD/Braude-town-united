@@ -23,7 +23,9 @@ import {
 
 import axios from "axios";
 
-const serverUrl = process.env.SERVER_URL;
+// const serverUrl = process.env.SERVER_URL;
+const serverUrl="";
+
 
 
 export default function MainPage() {
@@ -72,7 +74,7 @@ const options = {
       if(id){
         async function getKey() {
           console.log("about to to ask the key, testing response time");
-          const responeKey = await axios.get(`${serverUrl}/key`);
+          const responeKey = await axios.get(`/key`);
           setApiKey(responeKey.data);
           console.log(`got the key with axios , Censored`); 
         }
@@ -100,10 +102,10 @@ const options = {
           const emailForIndetification = userEmail.split('@')[0];
           //hardcoded email for testing
           console.log(
-            `requesting this :${serverUrl}/user-token?email=${emailForIndetification}`
+            `requesting this :/user-token?email=${emailForIndetification}`
           );
           const response = await axios.get(
-            `${serverUrl}/user-token`,
+            `/user-token`,
             {
               params: {
                 email: emailForIndetification
@@ -156,7 +158,7 @@ const options = {
     const handleSearch = async (plateNumber) => {
         const userId = plateNumber; // Assuming the plateNumber is the user ID you want to verify
 
-        const response = await axios.get(`${serverUrl}/api/getUserById`, {
+        const response = await axios.get(`/api/getUserById`, {
           params: {
             id: userId
           }

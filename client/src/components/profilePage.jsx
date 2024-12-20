@@ -30,7 +30,7 @@ export default function ProfilePage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setId(customId);
-    axios.post(process.env.SERVER_URL+'/api/createUser', {
+    axios.post('/api/createUser', {
       email: userInfo.email,
       id: customId
     }).then((response) => {
