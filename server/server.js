@@ -218,6 +218,7 @@ async function connectToMongo() {
     await db.collection('users').createIndex({ email: 1 }, { unique: true });
     console.log('Connected to MongoDB');
   } catch (error) {
+    console.log("MONGO NOT CONNECTED");
     console.error('MongoDB connection error:', error);
   }
 }

@@ -33,7 +33,9 @@ function SignIn() {
         setUserInfo({
           email: UserEmail
         });
-        axios.get(process.env.SERVER_URL+'/api/findUser', {
+        console.log("testing if server url is accessible",process.env.SERVER_URL+'/api/findUser');
+        console.log(" and requesting without server url");
+        axios.get('/api/findUser', {
             params: {
                email: UserEmail
             }
