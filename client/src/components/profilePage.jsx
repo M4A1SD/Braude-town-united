@@ -19,10 +19,10 @@ export default function ProfilePage() {
   
 
   useEffect(()=>{
-    console.log("profilePage.jsx: routing based on email and id",userInfo,id);
+    console.log("profilePage.jsx: routing based on email and id",userInfo,LoggedInUserPlateNumber);
     !userInfo?navigate('/login'):null; //if userInfo is not logged in, navigate to login page
     if(LoggedInUserPlateNumber!=null){
-      console.log("profilePage.jsx: id exists, routing to home",id);
+      console.log("profilePage.jsx: id exists, routing to home",LoggedInUserPlateNumber);
       navigate('/');
     }
   },[userInfo,LoggedInUserPlateNumber]);

@@ -7,6 +7,9 @@ import axios from 'axios';
 //npm install axios
 
 
+
+const SERVER_URL = "http://localhost:3000";
+
 function SignIn() {
     const navigate = useNavigate();
     const { setUserInfo, userInfo, setLoggedInUserPlateNumber } = useUserInfo();
@@ -16,8 +19,8 @@ function SignIn() {
     // console.log(credentialResponse);
     // Send the authorization code to your backend server
     try {
-      console.log("sending authorization code to server",process.env.SERVER_URL+'/api/auth/google');
-        const response = await fetch('/api/auth/google', {
+      console.log("sending authorization code to server",SERVER_URL+'/api/auth/google');
+        const response = await fetch(SERVER_URL+'/api/auth/google', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -33,9 +36,9 @@ function SignIn() {
         setUserInfo({
           email: UserEmail
         });
-        console.log("testing if server url is accessible",process.env.SERVER_URL+'/api/findUser');
+        console.log("testing if server url is accessible",SERVER_URL+'/api/findUser');
         console.log(" and requesting without server url");
-        axios.get('/api/findUser', {
+        axios.get(SERVER_URL+'/api/findUser', {
             params: {
                email: UserEmail
             }
@@ -47,7 +50,7 @@ function SignIn() {
             if (response.data.success) {
               console.log("User is in mongoDB, his plate is registered: ",response.data.user.plateNumber);
               setLoggedInUserPlateNumber(response.data.user.plateNumber);
-              console.log("have set the id to: ",id, "and navigating to home");
+              console.log("have set the id to: ",response.data.user.plateNumber, "and navigating to home");
               navigate('/');
             }
             else{

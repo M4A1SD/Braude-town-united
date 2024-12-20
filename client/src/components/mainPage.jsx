@@ -24,7 +24,7 @@ import {
 import axios from "axios";
 
 // const serverUrl = process.env.SERVER_URL;
-const serverUrl="";
+const serverUrl="http://localhost:3000";
 
 
 
@@ -62,7 +62,7 @@ export default function MainPage() {
 const sort = { last_message_at: -1 }; 
 
 console.log("the user should be email prefix: ", userInfo);
-    console.log("this could do nothing");
+console.log("this could do nothing");
 const filters = userInfo && LoggedInUserPlateNumber ? { 
   type: "messaging",
   members: { $in: [userInfo.email.split('@')[0]] },
@@ -78,9 +78,9 @@ const options = {
       if(LoggedInUserPlateNumber){
         async function getKey() {
           console.log("about to to ask the key, testing response time");
-          const responeKey = await axios.get(`/key`);
+          const responeKey = await axios.get(`${serverUrl}/key`);
           setApiKey(responeKey.data);
-          console.log(`got the key with axios , Censored`); 
+          console.log(`got the key with axios`); 
         }
         getKey();
       }
@@ -103,21 +103,26 @@ const options = {
     
           const chatClient = StreamChat.getInstance(apiKey);
     
-          const emailForIndetification = userEmail.split('@')[0];
+          const emailSplitted = userEmail.split('@')[0];
           //hardcoded email for testing
           console.log(
-            `requesting this :/user-token?email=${emailForIndetification}`
+            `requesting this :/user-token?email=${emailSplitted}`
           );
           const response = await axios.get(
-            `/user-token`,
+            `${serverUrl}/user-token`,
             {
               params: {
-                email: emailForIndetification
+                email: emailSplitted
               }
             }
           );
-    
+          console.log("response is: ", response);
+          if (typeof response.data === 'string' && response.data.includes('<!DOCTYPE html>')) {
+            console.error('Received HTML response instead of token');
+            throw new Error('Invalid response format');
+          }
           if (!response.data) {
+            
             throw new Error("Failed to get user token");
           }
           const userToken = response.data;
@@ -129,7 +134,7 @@ const options = {
     
             console.log("connecting in the user");
             const parameterForUserConnection = {
-              id: emailForIndetification,
+              id: emailSplitted,
               name: "",
 
             }
@@ -162,9 +167,9 @@ const options = {
     const handleSearch = async (plateNumber) => {
         // const userId = plateNumber; // Assuming the plateNumber is the user ID you want to verify
 
-        const response = await axios.get(`/api/getUserById`, {
+        const response = await axios.get(`${serverUrl}/api/getUserByPlateNumber`, {
           params: {
-            id: plateNumber
+            plateNumber: plateNumber
           }
         });
         console.log("response is: ", response);

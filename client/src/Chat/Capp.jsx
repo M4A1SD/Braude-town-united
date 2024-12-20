@@ -14,19 +14,19 @@ import {
 } from "stream-chat-react";
 //npm install stream-chat-react
 
+
+import { useUserInfo } from "../components/globalUser";
+
 // import "./Clayout.css";
 import "stream-chat-react/dist/css/v2/index.css"; // Adjust as needed
 import axios from "axios";
 // import { response } from "express"; 
 
 // const serverUrl = process.env.SERVER_URL; 
-const serverUrl="";
+const serverUrl="http://localhost:3000";
 //this is for the channel list
 const sort = { last_message_at: -1 }; 
-const filters = { 
-  type: "messaging",
-  members: { $in: ["bld939"] },
-};
+
 const options = {
   limit: 10,
 };
@@ -37,6 +37,13 @@ export default function ChatApp() {
   const [apiKey, setApiKey] = useState(null);
   //channel state
   const [channel, setChannel] = useState(null); //need this because i innitiated a chat with someone
+
+  const { userInfo } = useUserInfo();
+
+  const filters = { 
+    type: "messaging",
+    members: { $in: [userInfo.email.split('@')[0]] },
+  };
 
   useEffect(() => {
     async function getKey() {
@@ -60,12 +67,12 @@ export default function ChatApp() {
 
       //hardcoded email for testing
       console.log(
-        `requesting this :${serverUrl}/user-token?email=bld939@gmail.com`
+        `requesting this :${serverUrl}/user-token?email=${userInfo.email}`
       );
       const response = await axios.get(
-        `${serverUrl}/user-token?email=bld939@gmail.com`,
+        `${serverUrl}/user-token?email=${userInfo.email}`,
         {
-          email: "bld939@gmail.com",
+          email: userInfo.email,
         }
       );
 
@@ -81,9 +88,9 @@ export default function ChatApp() {
 
         console.log("connecting in the user");
         const testUser = {
-          id: 'bld939',
+          id: userInfo.email.split('@')[0],
           name: "",
-          email: "bld939@gmail.com"
+          email: userInfo.email
         }
         await chatClient.connectUser(
           testUser,
@@ -96,10 +103,10 @@ export default function ChatApp() {
       //commit
 
       // channel type is always messaing. then chat ID [this should be incrementing int]. then the {name , members}
-      const channel = chatClient.channel("messaging", "3", {
-        name: "new2",
-        members: ["bld939", "0"],
-      });
+      // const channel = chatClient.channel("messaging", "3", {
+      //   name: "new2",
+      //   members: [userInfo.email.split('@')[0], "0"],
+      // });
 
       setChannel(channel);
 

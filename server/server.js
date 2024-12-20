@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 app.use(cors({
-  origin: ['https://braude-town-united.onrender.com', 'http://localhost:5173'],
+  origin: ['https://braude-town-united.onrender.com', 'http://localhost:5173', 'http://localhost:3000'],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'Accept']
@@ -16,9 +16,9 @@ const PORT = process.env.PORT || 3000;
 
 // ------------------------------------------------------------------------------
 // Deployment
-const path = require('path');
+// const path = require('path');
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname, '../client/dist')));
+// app.use(express.static(path.join(__dirname, '../client/dist')));
 
 
 // ------------------------------------------------------------------------------
@@ -99,7 +99,7 @@ app.get("/", (req, res) => {
 
 app.get("/user-token", async (req, res) => {
   const email = req.query.email;
-  const userId = req.query.userId;
+  // const userId = req.query.userId; no need for this
   console.log("getting token");
   
   //need data base to keep track of IDS, for now just use email up until @
@@ -107,7 +107,8 @@ app.get("/user-token", async (req, res) => {
   try {
     const user = await clientChat.upsertUser({
       name: "",
-      id: email
+      id: email,
+      
 
     });
     console.log("upserted user:", email);
@@ -123,18 +124,6 @@ app.get("/user-token", async (req, res) => {
 });
 
 app.get("/key", (req, res) => {
-  // const allowedUrl = "url"; // Replace this with the URL you want to allow
-
-  // // Check the referer header or origin header
-  // const requestUrl = req.headers.referer || req.headers.origin;
-
-  // if (requestUrl === allowedUrl) {
-  //   res.json({ key: API_KEY });
-  // } else {
-  //   res.status(403).json({ error: "Forbidden" });
-  // }d
-  // console.log(`someone asked api ${keyRequests} times`);
-  // keyRequests += 1;
   res.json(process.env.API_KEY);
 });
 
@@ -267,10 +256,10 @@ app.post('/api/createUser', async (request,response)=>{
 })
 
 //get user mail by ID
-app.get('/api/getUserById', async (request,response)=>{
+app.get('/api/getUserByPlateNumber', async (request,response)=>{
   console.log("Getting user by ID", request.query)
-  const {id} = request.query
-  const user = await db.collection('users').findOne({id: id})
+  const {plateNumber} = request.query
+  const user = await db.collection('users').findOne({plateNumber: plateNumber})
   if(user){
     response.json({message: "User found", success: true, user: user})
   }else{
