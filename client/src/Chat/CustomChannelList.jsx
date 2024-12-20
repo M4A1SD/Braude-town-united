@@ -12,10 +12,11 @@ const CustomChannelList = ({setActiveChannel}) => {
   const navigate = useNavigate();
   const { userInfo, id, setId } = useUserInfo();
 
-  console.log("showing channel list for user ", id);
+  const userEmail = userInfo.email.split('@')[0]; 
+  console.log("showing channel list for user ", userEmail);
   const filters = { 
     type: "messaging",
-    members: { $in: [id] },
+    members: { $in: [userEmail] },
   };
   
   const sort = { last_message_at: -1 };
