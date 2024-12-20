@@ -17,7 +17,7 @@ function SignIn() {
     // Send the authorization code to your backend server
     try {
       console.log("sending authorization code to server",process.env.SERVER_URL+'/api/auth/google');
-        const response = await fetch(process.env.SERVER_URL+'/api/auth/google', {
+        const response = await fetch('/api/auth/google', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
