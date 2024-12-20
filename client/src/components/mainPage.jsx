@@ -120,7 +120,7 @@ const options = {
     
           try {
             //wait for the response to arrive
-            console.log("got the token of the user:", userToken);
+            // console.log("got the token of the user:", userToken);
     
     
             console.log("connecting in the user");
