@@ -10,7 +10,7 @@ import { useUserInfo } from '../components/globalUser';
 
 const CustomChannelList = ({setActiveChannel}) => {
   const navigate = useNavigate();
-  const { userInfo, id, setId } = useUserInfo();
+  const { userInfo } = useUserInfo();
 
   const userEmail = userInfo.email.split('@')[0]; 
   console.log("showing channel list for user ", userEmail);

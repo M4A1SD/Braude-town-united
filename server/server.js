@@ -256,8 +256,8 @@ app.get('/api/findUser', async (request,response)=>{
 //create entry mail:ID
 // make sure no duplicate entries created
 app.post('/api/createUser', async (request,response)=>{
-  const {email, id} = request.body
-  const result = await insertData({email, id})
+  const {email, plateNumber} = request.body
+  const result = await insertData({email, plateNumber})
   console.log("creating new user: ", email, id, result)
   if(result.failed){
     response.json({message: "User creation failed", result: result, success: false})

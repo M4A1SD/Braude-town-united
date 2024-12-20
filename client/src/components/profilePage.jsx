@@ -13,26 +13,26 @@ export default function ProfilePage() {
   
   const navigate = useNavigate();
 
-  const { userInfo, id, setId } = useUserInfo();
-  const [customId, setCustomId] = useState('');
+  const { userInfo, LoggedInUserPlateNumber, setLoggedInUserPlateNumber } = useUserInfo();
+  const [newPlateNumber, setNewPlateNumber] = useState('');
 
   
 
   useEffect(()=>{
     console.log("profilePage.jsx: routing based on email and id",userInfo,id);
     !userInfo?navigate('/login'):null; //if userInfo is not logged in, navigate to login page
-    if(id!=null){
+    if(LoggedInUserPlateNumber!=null){
       console.log("profilePage.jsx: id exists, routing to home",id);
       navigate('/');
     }
-  },[userInfo,id]);
+  },[userInfo,LoggedInUserPlateNumber]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setId(customId);
+    setLoggedInUserPlateNumber(newPlateNumber);
     axios.post('/api/createUser', {
       email: userInfo.email,
-      id: customId
+      plateNumber: newPlateNumber
     }).then((response) => {
       console.log(response.data);
     }).catch((error) => {
@@ -69,8 +69,8 @@ export default function ProfilePage() {
             id="customId"
             type="text"
             placeholder="1010010"
-            value={customId}
-            onChange={(e) => setCustomId(e.target.value)}
+            value={newPlateNumber}
+            onChange={(e) => setNewPlateNumber(e.target.value)}
           />
         </div>
         <div className="flex items-center justify-between">

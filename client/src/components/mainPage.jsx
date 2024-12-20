@@ -33,19 +33,19 @@ export default function MainPage() {
     const navigate = useNavigate();
 
 
-    const { userInfo, id } = useUserInfo();
+    const { userInfo, LoggedInUserPlateNumber } = useUserInfo();
 
     useEffect(() => {
         if (!userInfo) {
             navigate('/login');
             // grey out functionality
-        } else if (!id) {
+        } else if (!LoggedInUserPlateNumber) {
             navigate('/profile');
         }
         else{
-            console.log("userInfo and id exist", userInfo, id);
+            console.log("userInfo and id exist", userInfo, LoggedInUserPlateNumber);
         }
-    }, [userInfo, id]);
+    }, [userInfo, LoggedInUserPlateNumber]);
 
     // console.log("userInfo and id are: ", userInfo, id);
     const userEmail = userInfo ? userInfo.email : null;
@@ -57,11 +57,15 @@ export default function MainPage() {
     const [client, setClient] = useState(null);
     const [apiKey, setApiKey] = useState(null);
 
+    
 //this is for the channel list
 const sort = { last_message_at: -1 }; 
-const filters = userInfo && id ? { 
+
+console.log("the user should be email prefix: ", userInfo);
+    console.log("this could do nothing");
+const filters = userInfo && LoggedInUserPlateNumber ? { 
   type: "messaging",
-  members: { $in: [id] },
+  members: { $in: [userInfo.email.split('@')[0]] },
 } : {};
 const options = {
   limit: 10,
@@ -70,8 +74,8 @@ const options = {
 
     // get the api key
     useEffect(() => {
-      console.log("dont start unless user is registered", userInfo, id);
-      if(id){
+      console.log("dont start unless user is registered", userInfo, LoggedInUserPlateNumber);
+      if(LoggedInUserPlateNumber){
         async function getKey() {
           console.log("about to to ask the key, testing response time");
           const responeKey = await axios.get(`/key`);
@@ -80,14 +84,14 @@ const options = {
         }
         getKey();
       }
-    }, [userInfo, id]);
+    }, [userInfo, LoggedInUserPlateNumber]);
     
     
       //stubbed
       useEffect(() => {
-        console.log("dont start unless user is registered", userInfo, id);
+        console.log("dont start unless user is registered", userInfo, LoggedInUserPlateNumber);
 
-        if(id){
+        if(LoggedInUserPlateNumber){
 
 
 
@@ -149,18 +153,18 @@ const options = {
         client.disconnectUser();
       };
     }
-  }, [apiKey, userInfo, id]);
+  }, [apiKey, userInfo, LoggedInUserPlateNumber]);
 
     // --------------------
 
 
    
     const handleSearch = async (plateNumber) => {
-        const userId = plateNumber; // Assuming the plateNumber is the user ID you want to verify
+        // const userId = plateNumber; // Assuming the plateNumber is the user ID you want to verify
 
         const response = await axios.get(`/api/getUserById`, {
           params: {
-            id: userId
+            id: plateNumber
           }
         });
         console.log("response is: ", response);
@@ -177,11 +181,11 @@ const options = {
               try {
                 const mutualChatId = async () => {
                   // id + plateNumber
-                  if(id<plateNumber){
-                    return id + 'and' + plateNumber;
+                  if(LoggedInUserPlateNumber<plateNumber){
+                    return LoggedInUserPlateNumber + 'and' + plateNumber;
                   }
                   else{
-                    return plateNumber + 'and' + id;
+                    return plateNumber + 'and' + LoggedInUserPlateNumber;
                   }
                 };
                 console.log("mutualChatId is: ", mutualChatId());

@@ -9,7 +9,7 @@ import axios from 'axios';
 
 function SignIn() {
     const navigate = useNavigate();
-    const { setUserInfo, userInfo, setId } = useUserInfo();
+    const { setUserInfo, userInfo, setLoggedInUserPlateNumber } = useUserInfo();
   // This function will be called upon a successful login
   const handleSuccess = async (credentialResponse) => {
     // If you are using the authorization code flow, you will receive a code to be exchanged for an access token
@@ -45,8 +45,8 @@ function SignIn() {
             );
             console.log("Checking if user is in mongoDB");
             if (response.data.success) {
-              console.log("User is in mongoDB, his plate is registered: ",response.data.user.id);
-              setId(response.data.user.id);
+              console.log("User is in mongoDB, his plate is registered: ",response.data.user.plateNumber);
+              setLoggedInUserPlateNumber(response.data.user.plateNumber);
               console.log("have set the id to: ",id, "and navigating to home");
               navigate('/');
             }

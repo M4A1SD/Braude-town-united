@@ -6,10 +6,10 @@ const userInfoContext = createContext();
 // Create a provider
 export const UserProvider = ({ children }) => {
   const [userInfo, setUserInfo] = useState(null); // Default: not logged in
-  const [id , setId] = useState(null);
+  const [LoggedInUserPlateNumber , setLoggedInUserPlateNumber] = useState(null);
 
   return (
-    <userInfoContext.Provider value={{ userInfo, setUserInfo, id, setId }}>
+    <userInfoContext.Provider value={{ userInfo, setUserInfo, LoggedInUserPlateNumber, setLoggedInUserPlateNumber }}>
       {children}
     </userInfoContext.Provider>
   );
