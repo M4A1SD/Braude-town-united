@@ -2,8 +2,10 @@ const express = require('express');
 // npm install express
 const cors = require('cors');
 const app = express();
-app.use(cors()); 
-console.log("Add cors origin if connection issues arise")
+app.use(cors({
+  origin: 'https://braude-town-united.onrender.com',
+  credentials: true
+})); 
 app.use(express.json());
 require('dotenv').config();
 // npm install dotenv
