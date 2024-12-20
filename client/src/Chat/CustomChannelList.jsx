@@ -6,13 +6,16 @@ import { StreamChat } from 'stream-chat';
 import { Chat } from 'stream-chat-react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import "stream-chat-react/dist/css/v2/index.css"; // Adjust as needed
+import { useUserInfo } from '../components/globalUser';
 
 const CustomChannelList = ({setActiveChannel}) => {
   const navigate = useNavigate();
+  const { userInfo, id, setId } = useUserInfo();
 
+  console.log("showing channel list for user ", id);
   const filters = { 
     type: "messaging",
-    members: { $in: ["bld939"] },
+    members: { $in: [id] },
   };
   
   const sort = { last_message_at: -1 };

@@ -23,7 +23,7 @@ import {
 
 import axios from "axios";
 
-const serverUrl = "http://localhost:3000"; 
+const serverUrl = process.env.SERVER_URL;
 
 
 export default function MainPage() {

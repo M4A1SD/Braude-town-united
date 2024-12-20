@@ -19,7 +19,7 @@ import "stream-chat-react/dist/css/v2/index.css"; // Adjust as needed
 import axios from "axios";
 // import { response } from "express"; 
 
-const serverUrl = "http://localhost:5000"; 
+const serverUrl = process.env.SERVER_URL; 
 
 //this is for the channel list
 const sort = { last_message_at: -1 }; 

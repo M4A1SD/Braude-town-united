@@ -16,7 +16,7 @@ function SignIn() {
     console.log(credentialResponse);
     // Send the authorization code to your backend server
     try {
-        const response = await fetch('http://localhost:3000/api/auth/google', {
+        const response = await fetch(process.env.SERVER_URL+'/api/auth/google', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -32,7 +32,7 @@ function SignIn() {
         setUserInfo({
           email: UserEmail
         });
-        axios.get('http://localhost:3000/api/findUser', {
+        axios.get(process.env.SERVER_URL+'/api/findUser', {
             params: {
                email: UserEmail
             }
