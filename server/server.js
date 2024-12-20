@@ -1,0 +1,344 @@
+const express = require('express');
+// npm install express
+const cors = require('cors');
+const app = express();
+app.use(cors()); 
+console.log("Add cors origin if connection issues arise")
+app.use(express.json());
+require('dotenv').config();
+// npm install dotenv
+// npm init -y
+const PORT = process.env.PORT || 3000;
+// ------------------------------------------------------------------------------
+// GOOGLE AUTH
+const { OAuth2Client } = require('google-auth-library');
+// npm install google-auth-library
+
+console.log(process.env.GOOGLE_CLIENT_ID)
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+
+// Verify Google token
+async function verifyGoogleToken(token) {
+  try {
+    const ticket = await client.verifyIdToken({
+      idToken: token,
+      audience: process.env.GOOGLE_CLIENT_ID
+    });
+    return ticket.getPayload();
+  } catch (error) {
+    console.error('Error verifying Google token:', error);
+    return null;
+  }
+}
+
+// Login endpoint
+app.post('/api/auth/google', async (req, res) => {
+  const { credential } = req.body;
+  
+  const payload = await verifyGoogleToken(credential);
+  if (!payload) {
+    return res.status(400).json({ error: 'Invalid token' });
+  }
+
+  // Here you would typically:
+  // 1. Check if user exists in your database
+  // 2. Create user if they don't exist
+  // 3. Create a session or JWT token
+  // 4. Return user data and/or token
+
+  res.json({
+    user: {
+      email: payload.email,
+      name: payload.name,
+      picture: payload.picture
+    }
+  });
+});
+
+// ------------------------------------------------------------------------------
+// CHAT IMPORTS
+const StreamChat = require("stream-chat").StreamChat;
+// npm install stream-chat
+
+const clientChat = StreamChat.getInstance(
+  process.env.API_KEY,
+  process.env.API_KEY_SECRET
+);
+
+// clientChat.updateAppSettings({
+//   webhook_url: webhookUrl,
+// });
+
+
+clientChat.updateAppSettings({ reminders_interval: 86400 }); //86400 is 24 hours. i dont wanna spam the users
+
+//this is important, but only needed once.
+// clientChat.updateChannelType("messaging", {
+//   reminders: true,
+//   read_events: true,
+// });
+
+
+
+app.get("/", (req, res) => {
+  console.log("GET request received at /");
+  res.send("Server is running");
+});
+
+app.get("/user-token", async (req, res) => {
+  const email = req.query.email;
+  const userId = req.query.userId;
+  console.log("getting token");
+  
+  //need data base to keep track of IDS, for now just use email up until @
+  // const userId = email.split("@")[0];
+  try {
+    const user = await clientChat.upsertUser({
+      name: "",
+      id: email
+
+    });
+    console.log("upserted user:", email);
+    //create token takes the user id string
+    const token = clientChat.createToken(email);
+    console.log("token:", token);
+    res.json(token);
+
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({ error: "Failed to upsert user" });
+  }
+});
+
+app.get("/key", (req, res) => {
+  // const allowedUrl = "url"; // Replace this with the URL you want to allow
+
+  // // Check the referer header or origin header
+  // const requestUrl = req.headers.referer || req.headers.origin;
+
+  // if (requestUrl === allowedUrl) {
+  //   res.json({ key: API_KEY });
+  // } else {
+  //   res.status(403).json({ error: "Forbidden" });
+  // }d
+  // console.log(`someone asked api ${keyRequests} times`);
+  // keyRequests += 1;
+  res.json(process.env.API_KEY);
+});
+
+
+
+
+
+
+// ------------------------------------------------------------------------------
+// Mail imports
+const formData = require("form-data");
+const Mailgun = require("mailgun.js");
+// npm install mailgun.js
+const mailgun = new Mailgun(formData);
+
+const mg = mailgun.client({
+  username: "api",
+  key: process.env.MAILGUN_API_KEY,
+});
+
+//acutally need to create a real email
+app.post("/stream-event", (request, response, next) => {
+  return;
+  console.log("POST request received at /stream-event");
+
+
+  if (request.body.type != "message.new") {
+    console.log("email aborted");
+    response.status(200).json({ message: "not a new message" });
+    return;
+  }
+ 
+  const receiverEmail = request.body.members[0].user.email;
+  const newMessage = request.body.message.text;
+//commit1
+  mg.messages
+    .create("sandbox7435613884b0432d893fd5c676e55329.mailgun.org", {
+      from: "Braude-Town: New message alert! <mailgun@sandbox7435613884b0432d893fd5c676e55329.mailgun.org>",
+      to: [receiverEmail],
+      subject: "New message alert!",
+      text: `You have a new message: "${newMessage}"`,
+      html: `<h1>You have a new message: "${newMessage}"</h1>`,
+    })
+    .then((msg) => {
+      console.log("Email sent successfully:", msg);
+      response.status(200).json({ message: "Email sent successfully" });
+    })
+    .catch((err) => {
+      console.error("Error sending email:", err);
+      response.status(500).json({ error: "Failed to send email" });
+    });
+});
+
+
+
+
+
+
+
+
+
+// ------------------------------------------------------------------------------
+// DB
+const { MongoClient } = require('mongodb');
+
+
+
+// Replace the incorrect 'use' line with proper MongoDB connection
+const dbUser = process.env.MONGO_USER;
+const dbPassword = process.env.MONGO_PASSWORD;
+const uri = `mongodb+srv://${dbUser}:${dbPassword}@braudetowndb.ixdq1.mongodb.net/`;
+
+const clientDB = new MongoClient(uri);
+let db;
+
+// Connect to MongoDB
+async function connectToMongo() {
+  try {
+    await clientDB.connect();
+    db = clientDB.db('mongodbVSCodePlaygroundDB');
+    await db.collection('users').createIndex({ email: 1 }, { unique: true });
+    console.log('Connected to MongoDB');
+  } catch (error) {
+    console.error('MongoDB connection error:', error);
+  }
+}
+
+// Middleware
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Basic route
+app.get('/', (req, res) => {
+  res.json({ message: 'Welcome to the API' });
+});
+
+
+//get user ID by email
+app.get('/api/findUser', async (request,response)=>{
+  try {
+    const userInfo = request.query.email;
+    if (!userInfo) {
+      return response.status(400).json({ message: "Email is required", success: false });
+    }
+    
+    const user = await db.collection('users').findOne({ email: userInfo });
+    if (user) {
+      response.json({ message: "Exists", success: true, user: user });
+    } else {
+      response.status(404).json({ message: "Doesn't exist", success: false });
+    }
+  } catch (error) {
+    console.error('Error finding user:', error);
+    response.status(500).json({ message: "Server error", success: false });
+  }
+})
+
+//create entry mail:ID
+// make sure no duplicate entries created
+app.post('/api/createUser', async (request,response)=>{
+  const {email, id} = request.body
+  const result = await insertData({email, id})
+  console.log("creating new user: ", email, id, result)
+  if(result.failed){
+    response.json({message: "User creation failed", result: result, success: false})
+  }else{
+    response.json({message: "User created", result: result, success: true})
+  }
+})
+
+//get user mail by ID
+app.get('/api/getUserById', async (request,response)=>{
+  console.log("Getting user by ID", request.query)
+  const {id} = request.query
+  const user = await db.collection('users').findOne({id: id})
+  if(user){
+    response.json({message: "User found", success: true, user: user})
+  }else{
+    response.json({message: "User not found", success: false})
+  }
+})
+
+
+
+
+async function  insertData(data) {
+  try {
+    const collection = db.collection('users');
+    console.log(data);
+    const result = await collection.insertOne(data);
+    console.log("Insertion result: ", result);
+    return result;
+  } catch (error) {
+    if (error.code === 11000) {
+      console.log("Error: Email already exists");
+    }
+    console.log("Data insertion failed");
+    console.log(error);
+    return {failed: true, error: error};
+  }
+}
+
+async function deleteData(email) {
+  const collection = db.collection('users');
+  const delResult = await collection.deleteOne({email: email});
+  console.log("Deleted: ", delResult);
+}
+
+async function printData() {
+  const collection = db.collection('users');
+  const data = await collection.find({}).toArray();
+  console.log("Current database contents:");
+  console.log(data);
+  return data;
+}
+
+
+
+
+//testing functions
+async function main() {
+  await connectToMongo();
+  
+  await printData();
+  
+//   await insertData({
+//     email: `example${i}@gmail.com`,
+//     id: `611451${i}`
+//   });
+  
+//   await printData();
+  
+//   await deleteData(`example${i}@gmail.com`);
+//   await printData();
+//   await clientDB.close();
+}
+
+
+
+
+
+// ------------------------------------------------------------------------------
+// START
+
+// ensure DB connects before listening
+async function startServer() {
+  try {
+    await connectToMongo();
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
+  } catch (error) {
+    console.error('Failed to start server:', error);
+    process.exit(1);
+  }
+}
+
+startServer();

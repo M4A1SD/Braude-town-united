@@ -1,0 +1,30 @@
+{
+  "name": "express-api-server",
+  "version": "1.0.0",
+  "description": "A basic Express.js server with API endpoints",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
+  },
+  "keywords": [
+    "express",
+    "api",
+    "server"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "@react-oauth/google": "^0.12.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "google-auth-library": "^9.15.0",
+    "mailgun.js": "^10.2.4",
+    "mongodb": "^6.11.0",
+    "stream-chat": "^8.47.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.3"
+  }
+}
