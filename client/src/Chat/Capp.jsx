@@ -23,7 +23,7 @@ import axios from "axios";
 // import { response } from "express"; 
 
 // const serverUrl = process.env.SERVER_URL; 
-const serverUrl="http://localhost:3000";
+const serverUrl=import.meta.env.VITE_SERVER_URL;
 //this is for the channel list
 const sort = { last_message_at: -1 }; 
 

@@ -16,7 +16,8 @@ export default function ProfilePage() {
   const { userInfo, LoggedInUserPlateNumber, setLoggedInUserPlateNumber } = useUserInfo();
   const [newPlateNumber, setNewPlateNumber] = useState('');
 
-  
+  const serverUrl=import.meta.env.VITE_SERVER_URL;
+
 
   useEffect(()=>{
     console.log("profilePage.jsx: routing based on email and id",userInfo,LoggedInUserPlateNumber);
@@ -30,7 +31,7 @@ export default function ProfilePage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoggedInUserPlateNumber(newPlateNumber);
-    axios.post('/api/createUser', {
+    axios.post(serverUrl+'/api/createUser', {
       email: userInfo.email,
       plateNumber: newPlateNumber
     }).then((response) => {

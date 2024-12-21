@@ -1,3 +1,13 @@
+
+// ------------------------------------------------------------------------------
+// Deployment
+const path = require('path');
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, '../client/dist')));
+
+
+// ------------------------------------------------------------------------------
+
 const express = require('express');
 // npm install express
 const cors = require('cors');
@@ -14,14 +24,7 @@ require('dotenv').config();
 // npm init -y
 const PORT = process.env.PORT || 3000;
 
-// ------------------------------------------------------------------------------
-// Deployment
-// const path = require('path');
-// Serve static files from the React app
-// app.use(express.static(path.join(__dirname, '../client/dist')));
 
-
-// ------------------------------------------------------------------------------
 // GOOGLE AUTH
 const { OAuth2Client } = require('google-auth-library');
 // npm install google-auth-library
