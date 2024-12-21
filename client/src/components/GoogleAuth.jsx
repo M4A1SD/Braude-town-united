@@ -8,19 +8,19 @@ import axios from 'axios';
 
 
 
-const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+// const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 function SignIn() {
     const navigate = useNavigate();
-    const { setUserInfo, userInfo, setLoggedInUserPlateNumber } = useUserInfo();
+    const { setUserInfo, userInfo, setLoggedInUserPlateNumber, serverUrl } = useUserInfo();
   // This function will be called upon a successful login
   const handleSuccess = async (credentialResponse) => {
     // If you are using the authorization code flow, you will receive a code to be exchanged for an access token
     // console.log(credentialResponse);
     // Send the authorization code to your backend server
     try {
-      console.log("sending authorization code to server",SERVER_URL+'/api/auth/google');
-        const response = await fetch(SERVER_URL+'/api/auth/google', {
+      console.log("sending authorization code to server",serverUrl+'/api/auth/google');
+        const response = await fetch(serverUrl+'/api/auth/google', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -36,9 +36,9 @@ function SignIn() {
         setUserInfo({
           email: UserEmail
         });
-        console.log("testing if server url is accessible",SERVER_URL+'/api/findUser');
+        console.log("testing if server url is accessible",serverUrl+'/api/findUser');
         console.log(" and requesting without server url");
-        axios.get(SERVER_URL+'/api/findUser', {
+        axios.get(`${serverUrl}/api/findUser`, {
             params: {
                email: UserEmail
             }

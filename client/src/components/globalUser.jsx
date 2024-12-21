@@ -7,9 +7,13 @@ const userInfoContext = createContext();
 export const UserProvider = ({ children }) => {
   const [userInfo, setUserInfo] = useState(null); // Default: not logged in
   const [LoggedInUserPlateNumber , setLoggedInUserPlateNumber] = useState(null);
+  const [serverUrl, setServerUrl] = useState(import.meta.env.VITE_SERVER_URL);
+  if(serverUrl=="deploy"){
+    setServerUrl("");
+  }
 
   return (
-    <userInfoContext.Provider value={{ userInfo, setUserInfo, LoggedInUserPlateNumber, setLoggedInUserPlateNumber }}>
+    <userInfoContext.Provider value={{ userInfo, setUserInfo, LoggedInUserPlateNumber, setLoggedInUserPlateNumber, serverUrl, setServerUrl }}>
       {children}
     </userInfoContext.Provider>
   );

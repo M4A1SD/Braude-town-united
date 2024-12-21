@@ -7,16 +7,14 @@ import axios from 'axios';
 
 
 
-
 export default function ProfilePage() {
  
   
   const navigate = useNavigate();
 
-  const { userInfo, LoggedInUserPlateNumber, setLoggedInUserPlateNumber } = useUserInfo();
+  const { userInfo, LoggedInUserPlateNumber, setLoggedInUserPlateNumber, serverUrl } = useUserInfo();
   const [newPlateNumber, setNewPlateNumber] = useState('');
 
-  const serverUrl=import.meta.env.VITE_SERVER_URL;
 
 
   useEffect(()=>{

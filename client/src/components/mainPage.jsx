@@ -24,7 +24,10 @@ import {
 import axios from "axios";
 
 // const serverUrl = process.env.SERVER_URL;
-const serverUrl=import.meta.env.VITE_SERVER_URL;
+// const serverUrl=import.meta.env.VITE_SERVER_URL;
+// if(serverUrl=="deploy"){
+//   serverUrl="";
+// }
 
 
 
@@ -33,7 +36,7 @@ export default function MainPage() {
     const navigate = useNavigate();
 
 
-    const { userInfo, LoggedInUserPlateNumber } = useUserInfo();
+    const { userInfo, LoggedInUserPlateNumber, serverUrl } = useUserInfo();
 
     useEffect(() => {
         if (!userInfo) {

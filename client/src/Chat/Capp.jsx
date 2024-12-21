@@ -23,7 +23,7 @@ import axios from "axios";
 // import { response } from "express"; 
 
 // const serverUrl = process.env.SERVER_URL; 
-const serverUrl=import.meta.env.VITE_SERVER_URL;
+// const serverUrl=import.meta.env.VITE_SERVER_URL;
 //this is for the channel list
 const sort = { last_message_at: -1 }; 
 
@@ -38,7 +38,7 @@ export default function ChatApp() {
   //channel state
   const [channel, setChannel] = useState(null); //need this because i innitiated a chat with someone
 
-  const { userInfo } = useUserInfo();
+  const { userInfo, serverUrl } = useUserInfo();
 
   const filters = { 
     type: "messaging",
@@ -47,7 +47,7 @@ export default function ChatApp() {
 
   useEffect(() => {
     async function getKey() {
-      console.log("about to to ask the key, testing response time");
+      console.log("about to to ask the key, testing response time",serverUrl+'/key');
       const responeKey = await axios.get(`${serverUrl}/key`);
       setApiKey(responeKey.data);
       console.log(`got the key with axios , Censored`); 
