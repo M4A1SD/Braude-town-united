@@ -23,11 +23,7 @@ import {
 
 import axios from "axios";
 
-// const serverUrl = process.env.SERVER_URL;
-// const serverUrl=import.meta.env.VITE_SERVER_URL;
-// if(serverUrl=="deploy"){
-//   serverUrl="";
-// }
+
 
 
 
