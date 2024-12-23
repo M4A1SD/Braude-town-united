@@ -233,7 +233,11 @@ const options = {
               right: 0,
               bottom: 0,
               backgroundColor: 'white',
-              zIndex: 1000
+              zIndex: 1000,
+              height: '100vh',
+              display: 'flex',
+              flexDirection: 'column',
+              overflow: 'hidden'
             }}>
               <button 
                 onClick={() => setActiveChannel(null)}
@@ -254,8 +258,15 @@ const options = {
               </button>
               <Channel channel={activeChannel}>
                 <Window>
-                  <MessageList />
-                  <MessageInput />
+                  <div style={{
+                    height: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    overflow: 'hidden'
+                  }}>
+                    <MessageList style={{ flex: 1, overflow: 'auto' }} />
+                    <MessageInput style={{ position: 'relative' }} />
+                  </div>
                 </Window>
               </Channel>
             </div>
