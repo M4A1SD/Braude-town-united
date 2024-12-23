@@ -145,9 +145,8 @@ const mg = mailgun.client({
   key: process.env.MAILGUN_API_KEY,
 });
 
-//acutally need to create a real email
+
 app.post("/stream-event", (request, response, next) => {
-  return;
   console.log("POST request received at /stream-event");
 
 
