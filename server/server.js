@@ -172,13 +172,13 @@ app.post("/stream-event", async (request, response) => {
 
   try {
     // Send email using Resend
-    await resend.emails.send({
-      from: 'onboarding@resend.dev',
-      to: receiverEmail,
-      subject: 'New message alert!',
-      html: `<h1>You have a new message: "${newMessage}"</h1>`
-    });
-
+    // await resend.emails.send({
+    //   from: 'onboarding@resend.dev',
+    //   to: receiverEmail,
+    //   subject: 'New message alert!',
+    //   html: `<h1>You have a new message: "${newMessage}"</h1>`
+    // });
+    console.log("dont send resend mail yet");
     // Send email using Mailgun
     await mg.messages.create(
       "sandbox7435613884b0432d893fd5c676e55329.mailgun.org",
