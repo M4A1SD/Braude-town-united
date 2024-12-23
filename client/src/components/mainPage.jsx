@@ -260,19 +260,20 @@ const options = {
               <Channel channel={activeChannel}>
                 <Window>
                   <div style={{
-                    height: '100dvh',
+                    height: '100vh',
                     width: '100%',
                     display: 'flex',
                     flexDirection: 'column',
-                    maxWidth: '100vw',
-                    margin: '0 auto'
+                    position: 'relative',
+                    overflow: 'hidden'
                   }}>
                     <MessageList 
                       style={{ 
                         flex: 1,
                         overflow: 'auto',
                         paddingBottom: '60px',
-                        width: '100%'
+                        width: '100%',
+                        height: 'calc(100vh - 60px)'
                       }} 
                     />
                     <div style={{
@@ -282,12 +283,13 @@ const options = {
                       right: 0,
                       backgroundColor: 'white',
                       borderTop: '1px solid #eee',
-                      width: '100%'
+                      width: '100%',
+                      height: '60px'
                     }}>
                       <MessageInput 
                         style={{ 
                           width: '100%',
-                          minHeight: '60px',
+                          height: '100%',
                           maxWidth: '100vw'
                         }} 
                       />
