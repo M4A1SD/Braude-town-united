@@ -260,40 +260,30 @@ const options = {
               <Channel channel={activeChannel}>
                 <Window>
                   <div style={{
-                    height: '100vh',
-                    width: '100%',
+                    position: 'absolute',
+                    top: 0,
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
                     display: 'flex',
                     flexDirection: 'column',
-                    position: 'relative',
                     overflow: 'hidden'
                   }}>
                     <MessageList 
                       style={{ 
                         flex: 1,
                         overflow: 'auto',
-                        paddingBottom: '60px',
                         width: '100%',
-                        height: 'calc(100vh - 60px)'
                       }} 
                     />
-                    <div style={{
-                      position: 'fixed',
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                      backgroundColor: 'white',
-                      borderTop: '1px solid #eee',
-                      width: '100%',
-                      height: '60px'
-                    }}>
-                      <MessageInput 
-                        style={{ 
-                          width: '100%',
-                          height: '100%',
-                          maxWidth: '100vw'
-                        }} 
-                      />
-                    </div>
+                    <MessageInput 
+                      style={{ 
+                        width: '100%',
+                        minHeight: '60px',
+                        backgroundColor: 'white',
+                        borderTop: '1px solid #eee',
+                      }} 
+                    />
                   </div>
                 </Window>
               </Channel>
