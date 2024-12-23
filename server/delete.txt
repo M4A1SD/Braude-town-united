@@ -1,0 +1,491 @@
+POST request received at /stream-event
+ {
+  user: {
+    id: 'kerenkaza29',
+    name: '',
+    language: '',
+    role: 'user',
+    teams: [],
+    created_at: '2024-12-21T11:17:51.29233Z',
+    updated_at: '2024-12-23T16:59:24.221913Z',
+    banned: false,
+    online: false,
+    last_active: '2024-12-23T16:46:19.279369Z',
+    blocked_user_ids: [],
+    invisible: false
+  },
+  type: 'user.updated',
+  created_at: '2024-12-23T16:59:24.226057996Z',
+  request_info: {
+    type: 'server',
+    ip: '35.157.117.28',
+    user_agent: 'axios/1.7.9',
+    sdk: 'stream-chat-javascript-client-node-8.47.1'
+  }
+}
+Not a new message event - skipping email
+POST request received at /stream-event
+Webhook payload: {
+  type: 'message.new',
+  cid: 'messaging:6116512and77514401',
+  channel_id: '6116512and77514401',
+  channel_type: 'messaging',
+  message: {
+    id: 'kerenkaza29-UJDqbjUtyLa4iOWxg0ohr',
+    text: 'ת',
+    html: '<p>ת</p>\n',
+    type: 'regular',
+    user: {
+      id: 'kerenkaza29',
+      role: 'user',
+      created_at: '2024-12-21T11:17:51.29233Z',
+      updated_at: '2024-12-23T16:59:24.221913Z',
+      last_active: '2024-12-23T16:59:24.666915585Z',
+      last_engaged_at: '2024-12-23T15:33:43.638922Z',
+      banned: false,
+      online: true,
+      name: ''
+    },
+    attachments: [],
+    latest_reactions: [],
+    own_reactions: [],
+    reaction_counts: {},
+    reaction_scores: {},
+    reaction_groups: null,
+    reply_count: 0,
+    deleted_reply_count: 0,
+    cid: 'messaging:6116512and77514401',
+    created_at: '2024-12-23T16:59:30.613306Z',
+    updated_at: '2024-12-23T16:59:30.613306Z',
+    shadowed: false,
+    mentioned_users: [],
+    silent: false,
+    pinned: false,
+    pinned_at: null,
+    pinned_by: null,
+    pin_expires: null
+  },
+  channel: {
+    id: '6116512and77514401',
+    type: 'messaging',
+    cid: 'messaging:6116512and77514401',
+    last_message_at: '2024-12-23T16:59:30.613306Z',
+    created_at: '2024-12-21T11:18:01.65159Z',
+    updated_at: '2024-12-21T11:18:01.65159Z',
+    created_by: {
+      id: 'kerenkaza29',
+      role: 'user',
+      created_at: '2024-12-21T11:17:51.29233Z',
+      updated_at: '2024-12-23T16:59:24.221913Z',
+      last_active: '2024-12-23T16:59:24.666915585Z',
+      last_engaged_at: '2024-12-23T15:33:43.638922Z',
+      banned: false,
+      online: true,
+      name: ''
+    },
+    frozen: false,
+    disabled: false,
+    members: [ [Object], [Object] ],
+    member_count: 2,
+    config: {
+      created_at: '2024-10-12T15:43:39.078287Z',
+      updated_at: '2024-12-23T16:50:44.457115Z',
+      name: 'messaging',
+      typing_events: true,
+      read_events: true,
+      connect_events: true,
+      search: true,
+      reactions: true,
+      replies: false,
+      quotes: true,
+      mutes: true,
+      uploads: true,
+      url_enrichment: true,
+      custom_events: true,
+      push_notifications: true,
+      reminders: true,
+      mark_messages_pending: false,
+      polls: false,
+      message_retention: 'infinite',
+      max_message_length: 5000,
+      automod: 'disabled',
+      automod_behavior: 'flag',
+      blocklist_behavior: 'flag',
+      skip_last_msg_update_for_system_msgs: false,
+      commands: [Array]
+    },
+    name: 'Chat with 6116512'
+  },
+  user: {
+    id: 'kerenkaza29',
+    role: 'user',
+    created_at: '2024-12-21T11:17:51.29233Z',
+    updated_at: '2024-12-23T16:59:24.221913Z',
+    last_active: '2024-12-23T16:59:24.666915585Z',
+    last_engaged_at: '2024-12-23T15:33:43.638922Z',
+    banned: false,
+    online: true,
+    name: ''
+  },
+  watcher_count: 1,
+  channel_last_message_at: '2024-12-23T16:59:30.613306Z',
+  created_at: '2024-12-23T16:59:30.652445376Z',
+  members: [
+    {
+      user_id: 'bld939',
+      user: [Object],
+      status: 'member',
+      created_at: '2024-12-21T11:18:01.656607Z',
+      updated_at: '2024-12-21T11:18:01.656607Z',
+      banned: false,
+      shadow_banned: false,
+      archived_at: null,
+      pinned_at: null,
+      role: 'member',
+      channel_role: 'channel_member',
+      notifications_muted: false
+    },
+    {
+      user_id: 'kerenkaza29',
+      user: [Object],
+      status: 'member',
+      created_at: '2024-12-21T11:18:01.656607Z',
+      updated_at: '2024-12-21T11:18:01.656607Z',
+      banned: false,
+      shadow_banned: false,
+      archived_at: null,
+      pinned_at: null,
+      role: 'owner',
+      channel_role: 'channel_member',
+      notifications_muted: false
+    }
+  ],
+  message_id: 'kerenkaza29-UJDqbjUtyLa4iOWxg0ohr',
+  request_info: {
+    type: 'client',
+    ip: '5.29.244.156',
+    user_agent: 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Mobile Safari/537.36',
+    sdk: 'stream-chat-react-12.8.0-stream-chat-javascript-client-browser-8.47.0'
+  }
+}
+TypeError: Cannot read properties of undefined (reading 'name')
+    at FormData._getContentDisposition (/opt/render/project/src/server/node_modules/form-data/lib/form_data.js:227:40)
+    at FormData._multiPartHeader (/opt/render/project/src/server/node_modules/form-data/lib/form_data.js:178:33)
+    at FormData.append (/opt/render/project/src/server/node_modules/form-data/lib/form_data.js:71:21)
+    at o (/opt/render/project/src/server/node_modules/mailgun.js/mailgun.node.js:2:71031)
+    at /opt/render/project/src/server/node_modules/mailgun.js/mailgun.node.js:2:71389
+    at Array.forEach (<anonymous>)
+    at e.addCommonPropertyToFD (/opt/render/project/src/server/node_modules/mailgun.js/mailgun.node.js:2:71368)
+    at /opt/render/project/src/server/node_modules/mailgun.js/mailgun.node.js:2:68710
+    at Array.reduce (<anonymous>)
+    at e.createFormData (/opt/render/project/src/server/node_modules/mailgun.js/mailgun.node.js:2:68148)
+POST request received at /stream-event
+Webhook payload: {
+  type: 'message.new',
+  cid: 'messaging:6116512and77514401',
+  channel_id: '6116512and77514401',
+  channel_type: 'messaging',
+  message: {
+    id: 'kerenkaza29-UJDqbjUtyLa4iOWxg0ohr',
+    text: 'ת',
+    html: '<p>ת</p>\n',
+    type: 'regular',
+    user: {
+      id: 'kerenkaza29',
+      role: 'user',
+      created_at: '2024-12-21T11:17:51.29233Z',
+      updated_at: '2024-12-23T16:59:24.221913Z',
+      last_active: '2024-12-23T16:59:24.666915585Z',
+      last_engaged_at: '2024-12-23T15:33:43.638922Z',
+      banned: false,
+      online: true,
+      name: ''
+    },
+    attachments: [],
+    latest_reactions: [],
+    own_reactions: [],
+    reaction_counts: {},
+    reaction_scores: {},
+    reaction_groups: null,
+    reply_count: 0,
+    deleted_reply_count: 0,
+    cid: 'messaging:6116512and77514401',
+    created_at: '2024-12-23T16:59:30.613306Z',
+    updated_at: '2024-12-23T16:59:30.613306Z',
+    shadowed: false,
+    mentioned_users: [],
+    silent: false,
+    pinned: false,
+    pinned_at: null,
+    pinned_by: null,
+    pin_expires: null
+  },
+  channel: {
+    id: '6116512and77514401',
+    type: 'messaging',
+    cid: 'messaging:6116512and77514401',
+    last_message_at: '2024-12-23T16:59:30.613306Z',
+    created_at: '2024-12-21T11:18:01.65159Z',
+    updated_at: '2024-12-21T11:18:01.65159Z',
+    created_by: {
+      id: 'kerenkaza29',
+      role: 'user',
+      created_at: '2024-12-21T11:17:51.29233Z',
+      updated_at: '2024-12-23T16:59:24.221913Z',
+      last_active: '2024-12-23T16:59:24.666915585Z',
+      last_engaged_at: '2024-12-23T15:33:43.638922Z',
+      banned: false,
+      online: true,
+      name: ''
+    },
+    frozen: false,
+    disabled: false,
+    members: [ [Object], [Object] ],
+    member_count: 2,
+    config: {
+      created_at: '2024-10-12T15:43:39.078287Z',
+      updated_at: '2024-12-23T16:50:44.457115Z',
+      name: 'messaging',
+      typing_events: true,
+      read_events: true,
+      connect_events: true,
+      search: true,
+      reactions: true,
+      replies: false,
+      quotes: true,
+      mutes: true,
+      uploads: true,
+      url_enrichment: true,
+      custom_events: true,
+      push_notifications: true,
+      reminders: true,
+      mark_messages_pending: false,
+      polls: false,
+      message_retention: 'infinite',
+      max_message_length: 5000,
+      automod: 'disabled',
+      automod_behavior: 'flag',
+      blocklist_behavior: 'flag',
+      skip_last_msg_update_for_system_msgs: false,
+      commands: [Array]
+    },
+    name: 'Chat with 6116512'
+  },
+  user: {
+    id: 'kerenkaza29',
+    role: 'user',
+    created_at: '2024-12-21T11:17:51.29233Z',
+    updated_at: '2024-12-23T16:59:24.221913Z',
+    last_active: '2024-12-23T16:59:24.666915585Z',
+    last_engaged_at: '2024-12-23T15:33:43.638922Z',
+    banned: false,
+    online: true,
+    name: ''
+  },
+  watcher_count: 1,
+  channel_last_message_at: '2024-12-23T16:59:30.613306Z',
+  created_at: '2024-12-23T16:59:30.652445376Z',
+  members: [
+    {
+      user_id: 'bld939',
+      user: [Object],
+      status: 'member',
+      created_at: '2024-12-21T11:18:01.656607Z',
+      updated_at: '2024-12-21T11:18:01.656607Z',
+      banned: false,
+      shadow_banned: false,
+      archived_at: null,
+      pinned_at: null,
+      role: 'member',
+      channel_role: 'channel_member',
+      notifications_muted: false
+    },
+    {
+      user_id: 'kerenkaza29',
+      user: [Object],
+      status: 'member',
+      created_at: '2024-12-21T11:18:01.656607Z',
+      updated_at: '2024-12-21T11:18:01.656607Z',
+      banned: false,
+      shadow_banned: false,
+      archived_at: null,
+      pinned_at: null,
+      role: 'owner',
+      channel_role: 'channel_member',
+      notifications_muted: false
+    }
+  ],
+  message_id: 'kerenkaza29-UJDqbjUtyLa4iOWxg0ohr',
+  request_info: {
+    type: 'client',
+    ip: '5.29.244.156',
+    user_agent: 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Mobile Safari/537.36',
+    sdk: 'stream-chat-react-12.8.0-stream-chat-javascript-client-browser-8.47.0'
+  }
+}
+TypeError: Cannot read properties of undefined (reading 'name')
+    at FormData._getContentDisposition (/opt/render/project/src/server/node_modules/form-data/lib/form_data.js:227:40)
+    at FormData._multiPartHeader (/opt/render/project/src/server/node_modules/form-data/lib/form_data.js:178:33)
+    at FormData.append (/opt/render/project/src/server/node_modules/form-data/lib/form_data.js:71:21)
+    at o (/opt/render/project/src/server/node_modules/mailgun.js/mailgun.node.js:2:71031)
+    at /opt/render/project/src/server/node_modules/mailgun.js/mailgun.node.js:2:71389
+    at Array.forEach (<anonymous>)
+    at e.addCommonPropertyToFD (/opt/render/project/src/server/node_modules/mailgun.js/mailgun.node.js:2:71368)
+    at /opt/render/project/src/server/node_modules/mailgun.js/mailgun.node.js:2:68710
+    at Array.reduce (<anonymous>)
+    at e.createFormData (/opt/render/project/src/server/node_modules/mailgun.js/mailgun.node.js:2:68148)
+POST request received at /stream-event
+Webhook payload: {
+  type: 'message.new',
+  cid: 'messaging:6116512and77514401',
+  channel_id: '6116512and77514401',
+  channel_type: 'messaging',
+  message: {
+    id: 'kerenkaza29-UJDqbjUtyLa4iOWxg0ohr',
+    text: 'ת',
+    html: '<p>ת</p>\n',
+    type: 'regular',
+    user: {
+      id: 'kerenkaza29',
+      role: 'user',
+      created_at: '2024-12-21T11:17:51.29233Z',
+      updated_at: '2024-12-23T16:59:24.221913Z',
+      last_active: '2024-12-23T16:59:24.666915585Z',
+      last_engaged_at: '2024-12-23T15:33:43.638922Z',
+      banned: false,
+      online: true,
+      name: ''
+    },
+    attachments: [],
+    latest_reactions: [],
+    own_reactions: [],
+    reaction_counts: {},
+    reaction_scores: {},
+    reaction_groups: null,
+    reply_count: 0,
+    deleted_reply_count: 0,
+    cid: 'messaging:6116512and77514401',
+    created_at: '2024-12-23T16:59:30.613306Z',
+    updated_at: '2024-12-23T16:59:30.613306Z',
+    shadowed: false,
+    mentioned_users: [],
+    silent: false,
+    pinned: false,
+    pinned_at: null,
+    pinned_by: null,
+    pin_expires: null
+  },
+  channel: {
+    id: '6116512and77514401',
+    type: 'messaging',
+    cid: 'messaging:6116512and77514401',
+    last_message_at: '2024-12-23T16:59:30.613306Z',
+    created_at: '2024-12-21T11:18:01.65159Z',
+    updated_at: '2024-12-21T11:18:01.65159Z',
+    created_by: {
+      id: 'kerenkaza29',
+      role: 'user',
+      created_at: '2024-12-21T11:17:51.29233Z',
+      updated_at: '2024-12-23T16:59:24.221913Z',
+      last_active: '2024-12-23T16:59:24.666915585Z',
+      last_engaged_at: '2024-12-23T15:33:43.638922Z',
+      banned: false,
+      online: true,
+      name: ''
+    },
+    frozen: false,
+    disabled: false,
+    members: [ [Object], [Object] ],
+    member_count: 2,
+    config: {
+      created_at: '2024-10-12T15:43:39.078287Z',
+      updated_at: '2024-12-23T16:50:44.457115Z',
+      name: 'messaging',
+      typing_events: true,
+      read_events: true,
+      connect_events: true,
+      search: true,
+      reactions: true,
+      replies: false,
+      quotes: true,
+      mutes: true,
+      uploads: true,
+      url_enrichment: true,
+      custom_events: true,
+      push_notifications: true,
+      reminders: true,
+      mark_messages_pending: false,
+      polls: false,
+      message_retention: 'infinite',
+      max_message_length: 5000,
+      automod: 'disabled',
+      automod_behavior: 'flag',
+      blocklist_behavior: 'flag',
+      skip_last_msg_update_for_system_msgs: false,
+      commands: [Array]
+    },
+    name: 'Chat with 6116512'
+  },
+  user: {
+    id: 'kerenkaza29',
+    role: 'user',
+    created_at: '2024-12-21T11:17:51.29233Z',
+    updated_at: '2024-12-23T16:59:24.221913Z',
+    last_active: '2024-12-23T16:59:24.666915585Z',
+    last_engaged_at: '2024-12-23T15:33:43.638922Z',
+    banned: false,
+    online: true,
+    name: ''
+  },
+  watcher_count: 1,
+  channel_last_message_at: '2024-12-23T16:59:30.613306Z',
+  created_at: '2024-12-23T16:59:30.652445376Z',
+  members: [
+    {
+      user_id: 'bld939',
+      user: [Object],
+      status: 'member',
+      created_at: '2024-12-21T11:18:01.656607Z',
+      updated_at: '2024-12-21T11:18:01.656607Z',
+      banned: false,
+      shadow_banned: false,
+      archived_at: null,
+      pinned_at: null,
+      role: 'member',
+      channel_role: 'channel_member',
+      notifications_muted: false
+    },
+    {
+      user_id: 'kerenkaza29',
+      user: [Object],
+      status: 'member',
+      created_at: '2024-12-21T11:18:01.656607Z',
+      updated_at: '2024-12-21T11:18:01.656607Z',
+      banned: false,
+      shadow_banned: false,
+      archived_at: null,
+      pinned_at: null,
+      role: 'owner',
+      channel_role: 'channel_member',
+      notifications_muted: false
+    }
+  ],
+  message_id: 'kerenkaza29-UJDqbjUtyLa4iOWxg0ohr',
+  request_info: {
+    type: 'client',
+    ip: '5.29.244.156',
+    user_agent: 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Mobile Safari/537.36',
+    sdk: 'stream-chat-react-12.8.0-stream-chat-javascript-client-browser-8.47.0'
+  }
+}
+TypeError: Cannot read properties of undefined (reading 'name')
+    at FormData._getContentDisposition (/opt/render/project/src/server/node_modules/form-data/lib/form_data.js:227:40)
+    at FormData._multiPartHeader (/opt/render/project/src/server/node_modules/form-data/lib/form_data.js:178:33)
+    at FormData.append (/opt/render/project/src/server/node_modules/form-data/lib/form_data.js:71:21)
+    at o (/opt/render/project/src/server/node_modules/mailgun.js/mailgun.node.js:2:71031)
+    at /opt/render/project/src/server/node_modules/mailgun.js/mailgun.node.js:2:71389
+    at Array.forEach (<anonymous>)
+    at e.addCommonPropertyToFD (/opt/render/project/src/server/node_modules/mailgun.js/mailgun.node.js:2:71368)
+    at /opt/render/project/src/server/node_modules/mailgun.js/mailgun.node.js:2:68710
+    at Array.reduce (<anonymous>)
+    at e.createFormData (/opt/render/project/src/server/node_modules/mailgun.js/mailgun.node.js:2:68148)

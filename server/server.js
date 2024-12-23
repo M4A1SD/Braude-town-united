@@ -157,9 +157,11 @@ app.post("/stream-event", (request, response) => {
     return;
   }
  
-  const receiverEmail = request.body.members[0].user.email;
+  const receiverEmail = request.body.members[0].user_id + "@gmail.com";
+  console.log("receiverEmail:", receiverEmail);
   const newMessage = request.body.message.text;
-//commit1
+  console.log("messsage recieved:", newMessage);
+
   mg.messages
     .create("sandbox7435613884b0432d893fd5c676e55329.mailgun.org", {
       from: "Braude-Town: New message alert! <mailgun@sandbox7435613884b0432d893fd5c676e55329.mailgun.org>",
@@ -173,8 +175,8 @@ app.post("/stream-event", (request, response) => {
       response.status(200).json({ message: "Email sent successfully" });
     })
     .catch((err) => {
-      console.error("Error sending emails:", err);
-      response.status(500).json({ error: "Failed to send emails" });
+      console.error("Error sending email:", err);
+      response.status(500).json({ error: "Failed to send email" });
     });
 });
 
