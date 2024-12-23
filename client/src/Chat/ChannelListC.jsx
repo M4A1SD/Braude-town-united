@@ -1,9 +1,5 @@
 import React from 'react';
 import { ChannelList } from 'stream-chat-react';
-import { useState } from 'react';
-import ChatApp from './Capp';
-import { StreamChat } from 'stream-chat';
-import { Chat } from 'stream-chat-react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import "stream-chat-react/dist/css/v2/index.css"; // Adjust as needed
 import { useUserInfo } from '../components/globalUser';

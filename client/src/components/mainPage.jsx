@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Await } from 'react-router-dom';
 import { useUserInfo } from './globalUser';
-import LoginPage from './loginPage'
-import ProfilePage from './profilePage'
 import { useNavigate } from 'react-router-dom';
-import CustomChannelList from '../Chat/CustomChannelList';
+import CustomChannelList from '../Chat/ChannelListC';
 import SearchInput from './inMain/SearchC';
 
 import { StreamChat } from "stream-chat";

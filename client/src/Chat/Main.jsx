@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ChatApp from './Capp';
-import CustomChannelList from './CustomChannelList';
+import CustomChannelList from './ChannelListC';
 
 export default function Main() {
     const [plateNumber, setPlateNumber] = useState('');
