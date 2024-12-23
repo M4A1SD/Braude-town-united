@@ -146,12 +146,13 @@ const mg = mailgun.client({
 });
 
 
-app.post("/stream-event", (request, response, next) => {
+app.post("/stream-event", (request, response) => {
   console.log("POST request received at /stream-event");
+  console.log("Webhook payload:", request.body);
 
-
-  if (request.body.type != "message.new") {
-    console.log("email aborted");
+  // Check if it's a new message event
+  if (request.body.type !== "message.new") {
+    console.log("Not a new message event - skipping email");
     response.status(200).json({ message: "not a new message" });
     return;
   }
@@ -172,8 +173,8 @@ app.post("/stream-event", (request, response, next) => {
       response.status(200).json({ message: "Email sent successfully" });
     })
     .catch((err) => {
-      console.error("Error sending email:", err);
-      response.status(500).json({ error: "Failed to send email" });
+      console.error("Error sending emails:", err);
+      response.status(500).json({ error: "Failed to send emails" });
     });
 });
 
