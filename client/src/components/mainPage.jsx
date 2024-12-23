@@ -262,10 +262,26 @@ const options = {
                     height: '100%',
                     display: 'flex',
                     flexDirection: 'column',
-                    overflow: 'hidden'
+                    position: 'relative'
                   }}>
-                    <MessageList style={{ flex: 1, overflow: 'auto' }} />
-                    <MessageInput style={{ position: 'relative' }} />
+                    <MessageList 
+                      style={{ 
+                        flex: 1,
+                        overflow: 'auto',
+                        marginBottom: '60px'
+                      }} 
+                    />
+                    <MessageInput 
+                      style={{ 
+                        position: 'absolute',
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        backgroundColor: 'white',
+                        zIndex: 100,
+                        minHeight: '60px'
+                      }} 
+                    />
                   </div>
                 </Window>
               </Channel>
