@@ -4,7 +4,7 @@ import LoginPage from './components/loginPage'
 import ProfilePage from './components/profilePage'
 import { UserProvider } from './components/globalUser'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Main from './Chat/Main'
+
 
 
 

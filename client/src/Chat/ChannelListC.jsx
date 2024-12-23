@@ -1,11 +1,9 @@
 import React from 'react';
 import { ChannelList } from 'stream-chat-react';
-import { Navigate, useNavigate } from 'react-router-dom';
 import "stream-chat-react/dist/css/v2/index.css"; // Adjust as needed
 import { useUserInfo } from '../components/globalUser';
 
 const CustomChannelList = ({setActiveChannel}) => {
-  const navigate = useNavigate();
   const { userInfo } = useUserInfo();
 
   const userEmail = userInfo.email.split('@')[0]; 

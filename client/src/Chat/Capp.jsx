@@ -22,8 +22,7 @@ import "stream-chat-react/dist/css/v2/index.css"; // Adjust as needed
 import axios from "axios";
 // import { response } from "express"; 
 
-// const serverUrl = process.env.SERVER_URL; 
-// const serverUrl=import.meta.env.VITE_SERVER_URL;
+
 //this is for the channel list
 const sort = { last_message_at: -1 }; 
 
@@ -65,7 +64,6 @@ export default function ChatApp() {
 
       const chatClient = StreamChat.getInstance(apiKey);
 
-      //hardcoded email for testing
       console.log(
         `requesting this :${serverUrl}/user-token?email=${userInfo.email}`
       );
@@ -100,13 +98,7 @@ export default function ChatApp() {
       } catch (error) {
         console.log("didnt connectUser: ", error);
       }
-      //commit
 
-      // channel type is always messaing. then chat ID [this should be incrementing int]. then the {name , members}
-      // const channel = chatClient.channel("messaging", "3", {
-      //   name: "new2",
-      //   members: [userInfo.email.split('@')[0], "0"],
-      // });
 
       setChannel(channel);
 

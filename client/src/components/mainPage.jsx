@@ -162,54 +162,37 @@ const options = {
 
    
     const handleSearch = async (plateNumber) => {
-        // const userId = plateNumber; // Assuming the plateNumber is the user ID you want to verify
+        try {
+            // Check if user exists
+            const response = await axios.get(`${serverUrl}/api/getUserByPlateNumber`, {
+                params: { plateNumber }
+            });
 
-        const response = await axios.get(`${serverUrl}/api/getUserByPlateNumber`, {
-          params: {
-            plateNumber: plateNumber
-          }
-        });
-        console.log("response is: ", response);
-
-
-
-        try{
-            if (response.data.success) {
-                console.log("User exists:", response.data.user.email);
-                const recepientEmailSplit  = response.data.user.email.split('@')[0];
-              
-      
-      
-              try {
-                const mutualChatId = async () => {
-                  // id + plateNumber
-                  if(LoggedInUserPlateNumber<plateNumber){
-                    return LoggedInUserPlateNumber + 'and' + plateNumber;
-                  }
-                  else{
-                    return plateNumber + 'and' + LoggedInUserPlateNumber;
-                  }
-                };
-                console.log("mutualChatId is: ", mutualChatId());
-                const channel = client.channel('messaging', await mutualChatId(), {
-                  name: `Chat with ${plateNumber}`,
-                  members: [client._user.id, recepientEmailSplit],
-                });
-          
-                await channel.watch();
-                setActiveChannel(channel);
-              } catch (err) {
-                console.error('Error starting chat:', err);
-              }
-            }
-            else{
+            if (!response.data.success) {
                 console.log("user does not exist");
                 alert("user does not exist yet :(");
-
+                return;
             }
-        }
-        catch(error){
-            console.log("Error checking user existence or creating channel:", error);
+
+            const recipientEmailSplit = response.data.user.email.split('@')[0];
+            
+            // Generate mutual chat ID
+            const mutualChatId = LoggedInUserPlateNumber < plateNumber 
+                ? `${LoggedInUserPlateNumber}and${plateNumber}`
+                : `${plateNumber}and${LoggedInUserPlateNumber}`;
+
+            // Create and watch channel
+            const channel = client.channel('messaging', mutualChatId, {
+                name: `Chat with ${plateNumber}`,
+                members: [client._user.id, recipientEmailSplit],
+            });
+    
+            await channel.watch();
+            setActiveChannel(channel);
+
+        } catch (error) {
+            console.error("Error in handleSearch:", error);
+            alert("An error occurred while searching for the user");
         }
     }
     
