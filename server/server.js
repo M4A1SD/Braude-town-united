@@ -17,6 +17,7 @@ const PORT = process.env.PORT || 3000;
 // ------------------------------------------------------------------------------
 // Deployment
 const path = require('path');
+console.log("local mode")
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
