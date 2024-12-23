@@ -259,29 +259,32 @@ const options = {
               <Channel channel={activeChannel}>
                 <Window>
                   <div style={{
-                    height: '100%',
+                    height: '100dvh',
                     display: 'flex',
                     flexDirection: 'column',
-                    position: 'relative'
                   }}>
                     <MessageList 
                       style={{ 
                         flex: 1,
                         overflow: 'auto',
-                        marginBottom: '60px'
+                        paddingBottom: '60px'
                       }} 
                     />
-                    <MessageInput 
-                      style={{ 
-                        position: 'absolute',
-                        bottom: 0,
-                        left: 0,
-                        right: 0,
-                        backgroundColor: 'white',
-                        zIndex: 100,
-                        minHeight: '60px'
-                      }} 
-                    />
+                    <div style={{
+                      position: 'fixed',
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      backgroundColor: 'white',
+                      borderTop: '1px solid #eee'
+                    }}>
+                      <MessageInput 
+                        style={{ 
+                          width: '100%',
+                          minHeight: '60px'
+                        }} 
+                      />
+                    </div>
                   </div>
                 </Window>
               </Channel>
