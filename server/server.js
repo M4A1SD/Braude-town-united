@@ -1,3 +1,5 @@
+// import { Resend } from 'resend';
+const { Resend } = require('resend');
 const express = require('express');
 // npm install express
 const cors = require('cors');
@@ -140,6 +142,14 @@ const Mailgun = require("mailgun.js");
 // npm install mailgun.js
 const mailgun = new Mailgun(formData);
 
+
+// npm install resend
+
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+
+
 const mg = mailgun.client({
   username: "api",
   key: process.env.MAILGUN_API_KEY,
@@ -161,6 +171,16 @@ app.post("/stream-event", (request, response) => {
   console.log("receiverEmail:", receiverEmail);
   const newMessage = request.body.message.text;
   console.log("messsage recieved:", newMessage);
+
+
+  resend.emails.send({
+    from: 'onboarding@resend.dev',
+    to: receiverEmail,
+    subject: 'New message alert!',
+    html: `<h1>You have a new message: "${newMessage}"</h1>`
+  });
+  
+
 
   mg.messages
     .create("sandbox7435613884b0432d893fd5c676e55329.mailgun.org", {

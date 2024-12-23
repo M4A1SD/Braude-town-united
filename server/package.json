@@ -22,6 +22,7 @@
     "google-auth-library": "^9.15.0",
     "mailgun.js": "^10.2.4",
     "mongodb": "^6.11.0",
+    "resend": "^4.0.1",
     "stream-chat": "^8.47.1"
   },
   "devDependencies": {
