@@ -156,15 +156,13 @@ const mg = mailgun.client({
 });
 
 
-app.post("/stream-event", (request, response) => {
+app.post("/stream-event", async (request, response) => {
   console.log("POST request received at /stream-event");
-  // console.log("Webhook payload:", request.body);
 
   // Check if it's a new message event
   if (request.body.type !== "message.new") {
     console.log("Not a new message event - skipping email");
-    response.status(200).json({ message: "not a new message" });
-    return;
+    return response.status(200).json({ message: "not a new message" });
   }
  
   const receiverEmail = request.body.members[0].user_id + "@gmail.com";
@@ -172,38 +170,34 @@ app.post("/stream-event", (request, response) => {
   const newMessage = request.body.message.text;
   console.log("messsage recieved:", newMessage);
 
-
-  resend.emails.send({
-    from: 'onboarding@resend.dev',
-    to: receiverEmail,
-    subject: 'New message alert!',
-    html: `<h1>You have a new message: "${newMessage}"</h1>`
-  }).then((res)=>{
-    console.log("Email sent successfully:", res);
-    response.status(200).json({ message: "Resended successfully" });
-  }).catch((err)=>{
-    console.error("Error sending email:", err);
-    response.status(500).json({ error: "Failed to send email" });
-  });
-  
-
-
-  mg.messages
-    .create("sandbox7435613884b0432d893fd5c676e55329.mailgun.org", {
-      from: "Braude-Town: New message alert! <mailgun@sandbox7435613884b0432d893fd5c676e55329.mailgun.org>",
-      to: [receiverEmail],
-      subject: "New message alert!",
-      text: `You have a new message: "${newMessage}"`,
-      html: `<h1>You have a new message: "${newMessage}"</h1>`,
-    })
-    .then((msg) => {
-      console.log("Email sent successfully:", msg);
-      response.status(200).json({ message: "Email sent successfully" });
-    })
-    .catch((err) => {
-      console.error("Error sending email:", err);
-      response.status(500).json({ error: "Failed to send email" });
+  try {
+    // Send email using Resend
+    await resend.emails.send({
+      from: 'onboarding@resend.dev',
+      to: receiverEmail,
+      subject: 'New message alert!',
+      html: `<h1>You have a new message: "${newMessage}"</h1>`
     });
+
+    // Send email using Mailgun
+    await mg.messages.create(
+      "sandbox7435613884b0432d893fd5c676e55329.mailgun.org",
+      {
+        from: "Braude-Town: New message alert! <mailgun@sandbox7435613884b0432d893fd5c676e55329.mailgun.org>",
+        to: [receiverEmail],
+        subject: "New message alert!",
+        text: `You have a new message: "${newMessage}"`,
+        html: `<h1>You have a new message: "${newMessage}"</h1>`,
+      }
+    );
+
+    console.log("Emails sent successfully");
+    return response.status(200).json({ message: "Emails sent successfully" });
+
+  } catch (error) {
+    console.error("Error sending email:", error);
+    return response.status(500).json({ error: "Failed to send email" });
+  }
 });
 
 
