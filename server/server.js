@@ -78,18 +78,18 @@ const clientChat = StreamChat.getInstance(
   process.env.API_KEY_SECRET
 );
 
-// clientChat.updateAppSettings({
-//   webhook_url: webhookUrl,
-// });
+clientChat.updateAppSettings({
+  webhook_url: "https://braude-town-united.onrender.com/stream-event",
+});
 
 
 clientChat.updateAppSettings({ reminders_interval: 86400 }); //86400 is 24 hours. i dont wanna spam the users
 
 //this is important, but only needed once.
-// clientChat.updateChannelType("messaging", {
-//   reminders: true,
-//   read_events: true,
-// });
+clientChat.updateChannelType("messaging", {
+  reminders: true,
+  read_events: true,
+});
 
 
 
