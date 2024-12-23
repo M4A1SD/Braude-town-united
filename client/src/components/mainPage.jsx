@@ -211,86 +211,89 @@ const options = {
     }
     
     return (
-
-        // if not logged in, grey out, and login button
-        <Chat client={client}>
-          {!activeChannel ? (
-            <div>
-                
-              <SearchInput onSearch={handleSearch} />
-              <CustomChannelList
-                client={client}
-                activeChannel={activeChannel}
-                setActiveChannel={useOldChat}
-                />
-
-            </div>
-          ) : (
-            <div style={{
-              position: 'fixed',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              backgroundColor: 'white',
-              zIndex: 1000,
-              height: '100vh',
-              width: '100vw',
-              display: 'flex',
-              flexDirection: 'column',
-              overflow: 'hidden'
-            }}>
-              <button 
-                onClick={() => setActiveChannel(null)}
-                style={{
-                  position: 'absolute',
-                  top: '10px',
-                  left: '10px',
-                  zIndex: 1001,
-                  padding: '8px 16px',
-                  borderRadius: '4px',
-                  border: 'none',
-                  backgroundColor: 'rgba(0, 123, 255, 0.7)',
-                  color: 'white',
-                  cursor: 'pointer'
-                }}
-              >
-                Return
-              </button>
-              <Channel channel={activeChannel}>
-                <Window>
-                  <div style={{
-                    position: 'absolute',
-                    top: 0,
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    overflow: 'hidden'
-                  }}>
-                    <MessageList 
-                      style={{ 
-                        flex: 1,
-                        overflow: 'auto',
+        <div style={{ 
+            height: '100dvh', // dynamic viewport height
+            width: '100%',
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            overflow: 'hidden'
+        }}>
+            <Chat client={client}>
+                {!activeChannel ? (
+                    <div style={{
+                        height: '100%',
                         width: '100%',
-                      }} 
-                    />
-                    <MessageInput 
-                      style={{ 
+                        overflow: 'auto'
+                    }}>
+                        <SearchInput onSearch={handleSearch} />
+                        <CustomChannelList
+                            client={client}
+                            activeChannel={activeChannel}
+                            setActiveChannel={useOldChat}
+                        />
+                    </div>
+                ) : (
+                    <div style={{
+                        height: '100dvh',
                         width: '100%',
-                        minHeight: '60px',
                         backgroundColor: 'white',
-                        borderTop: '1px solid #eee',
-                      }} 
-                    />
-                  </div>
-                </Window>
-              </Channel>
-            </div>
-          )}
-        </Chat>
-      );
-    };
+                        position: 'fixed',
+                        top: 0,
+                        left: 0,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        overflow: 'hidden'
+                    }}>
+                        <button 
+                            onClick={() => setActiveChannel(null)}
+                            style={{
+                                position: 'absolute',
+                                top: '10px',
+                                left: '10px',
+                                zIndex: 1001,
+                                padding: '8px 16px',
+                                borderRadius: '4px',
+                                border: 'none',
+                                backgroundColor: 'rgba(0, 123, 255, 0.7)',
+                                color: 'white',
+                                cursor: 'pointer'
+                            }}
+                        >
+                            Return
+                        </button>
+                        <Channel channel={activeChannel}>
+                            <Window>
+                                <div style={{
+                                    height: '100dvh',
+                                    width: '100%',
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    overflow: 'hidden'
+                                }}>
+                                    <MessageList 
+                                        style={{ 
+                                            flex: 1,
+                                            overflow: 'auto',
+                                            width: '100%',
+                                        }} 
+                                    />
+                                    <MessageInput 
+                                        style={{ 
+                                            width: '100%',
+                                            minHeight: '60px',
+                                            backgroundColor: 'white',
+                                            borderTop: '1px solid #eee',
+                                        }} 
+                                    />
+                                </div>
+                            </Window>
+                        </Channel>
+                    </div>
+                )}
+            </Chat>
+        </div>
+    );
+}
     
     
