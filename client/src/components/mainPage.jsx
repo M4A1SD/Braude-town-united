@@ -235,6 +235,7 @@ const options = {
               backgroundColor: 'white',
               zIndex: 1000,
               height: '100vh',
+              width: '100vw',
               display: 'flex',
               flexDirection: 'column',
               overflow: 'hidden'
@@ -260,14 +261,18 @@ const options = {
                 <Window>
                   <div style={{
                     height: '100dvh',
+                    width: '100%',
                     display: 'flex',
                     flexDirection: 'column',
+                    maxWidth: '100vw',
+                    margin: '0 auto'
                   }}>
                     <MessageList 
                       style={{ 
                         flex: 1,
                         overflow: 'auto',
-                        paddingBottom: '60px'
+                        paddingBottom: '60px',
+                        width: '100%'
                       }} 
                     />
                     <div style={{
@@ -276,12 +281,14 @@ const options = {
                       left: 0,
                       right: 0,
                       backgroundColor: 'white',
-                      borderTop: '1px solid #eee'
+                      borderTop: '1px solid #eee',
+                      width: '100%'
                     }}>
                       <MessageInput 
                         style={{ 
                           width: '100%',
-                          minHeight: '60px'
+                          minHeight: '60px',
+                          maxWidth: '100vw'
                         }} 
                       />
                     </div>
