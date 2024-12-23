@@ -158,7 +158,7 @@ const mg = mailgun.client({
 
 app.post("/stream-event", (request, response) => {
   console.log("POST request received at /stream-event");
-  console.log("Webhook payload:", request.body);
+  // console.log("Webhook payload:", request.body);
 
   // Check if it's a new message event
   if (request.body.type !== "message.new") {
@@ -178,6 +178,12 @@ app.post("/stream-event", (request, response) => {
     to: receiverEmail,
     subject: 'New message alert!',
     html: `<h1>You have a new message: "${newMessage}"</h1>`
+  }).then((res)=>{
+    console.log("Email sent successfully:", res);
+    response.status(200).json({ message: "Resended successfully" });
+  }).catch((err)=>{
+    console.error("Error sending email:", err);
+    response.status(500).json({ error: "Failed to send email" });
   });
   
 
